@@ -146,6 +146,7 @@ def candidate(project, args, base, spec, idx, model):
         else:
             print(f"[{args.wp}] {name} r{r}: unit {res['passed']}p/{res['failed']}f", flush=True)
         if not res["ok"]:
+            visual_ok = False
             task = first + f"\n\n# Тесты не прошли\n```\n{res['tail']}\n```\nИсправь код."
             continue
         report, visual_ok = run_visual_diagnostics(wt)
