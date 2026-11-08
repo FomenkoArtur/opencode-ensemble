@@ -1,4 +1,4 @@
-﻿{
+{
   "generators": [
     "opencode/deepseek-v4.1-flash-free",
     "opencode/glm-5.3-flash-free",
