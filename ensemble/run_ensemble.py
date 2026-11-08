@@ -127,7 +127,7 @@ def run_visual_diagnostics(wt, timeout=180):
     except: return "Таймаут", True
 
 def commit(wt, msg):
-    git("add", "-A", "--", ".", ":(exclude)TASK.md", ":(exclude)PLAN.md", ":(exclude)_oc_*.log", ":(exclude)diagnostics", cwd=wt)
+    git("add", "-A", "--", ".", ":(exclude)TASK.md", ":(exclude)PLAN.md", ":(exclude)_oc_*.log", ":(exclude)diagnostics", ":(exclude)specs", ":(exclude)acceptance", ":(exclude)__pycache__", ":(exclude)*.pyc", cwd=wt)
     git("-c", "user.name=ens", "-c", "user.email=ens@local", "commit", "-q", "--allow-empty", "-m", msg, cwd=wt)
 
 def candidate(project, args, base, spec, idx, model):
@@ -135,7 +135,7 @@ def candidate(project, args, base, spec, idx, model):
     wt = make_worktree(project, args.wp, name, base)
     _ensure_files(project, wt)
     first = TEMPLATE.format(persona=PERSONAS[idx % len(PERSONAS)], spec=spec, test=args.test)
-    task, res, report, visual_ok = first, {}, "", True
+    task, res, report, visual_ok = first, {}, "", False
     r = -1
     for r in range(args.rounds + 1):
         rc = ask(project, model, task, wt, f"{args.wp}-{name}-r{r}", args.timeout)
